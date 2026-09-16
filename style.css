@@ -406,13 +406,17 @@ ul {
   align-items: center;
   max-width: 860px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .project:hover {
   transform: translateY(-6px);
   box-shadow: 0 24px 48px -24px rgba(36, 35, 41, 0.22);
+}
+
+.project__info {
+  padding: 0 1.25rem;
 }
 
 .project__preview {
@@ -788,8 +792,8 @@ li:nth-child(2) .contact-link__icon {
 
 .project__image {
   width: 100%;
-  height:100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   display: block;
   transition: transform 0.5s ease;
 }
