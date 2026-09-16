@@ -590,6 +590,18 @@ ul {
   margin-bottom: 0.25rem;
 }
 
+.edu-item__link {
+  color: inherit;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, opacity 0.25s ease;
+}
+
+.edu-item__link:hover,
+.edu-item__link:focus-visible {
+  border-bottom-color: var(--muted);
+  opacity: 0.75;
+}
+
 .edu-item__affiliation {
   font-size: 0.92rem;
   color: var(--muted);
