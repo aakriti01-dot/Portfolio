@@ -37,6 +37,17 @@ if ('IntersectionObserver' in window && revealEls.length) {
   revealEls.forEach((el) => el.classList.add('is-visible'));
 }
 
+// Beyond Technology — pause the SheDesign auto-scroll while it's being touched/swiped
+const beyondGallery = document.querySelector('[data-gallery]');
+if (beyondGallery) {
+  const pauseGallery = () => beyondGallery.classList.add('is-paused');
+  const resumeGallery = () => beyondGallery.classList.remove('is-paused');
+
+  beyondGallery.addEventListener('touchstart', pauseGallery, { passive: true });
+  beyondGallery.addEventListener('touchend', resumeGallery);
+  beyondGallery.addEventListener('touchcancel', resumeGallery);
+}
+
 // Footer year
 const yearEl = document.getElementById('year');
 if (yearEl) {
