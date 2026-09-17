@@ -676,17 +676,13 @@ ul {
 }
 
 .beyond-carousel__frame {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
+  position: relative;
   width: 100%;
 }
 
 .beyond-carousel__photo {
   display: block;
-  flex: 1;
-  min-width: 0;
+  width: 100%;
   padding: 0;
   border: none;
   background: none;
@@ -697,17 +693,17 @@ ul {
 
 .beyond-carousel__image {
   display: block;
-  max-width: 100%;
-  max-height: 380px;
-  width: auto;
+  width: 100%;
   height: auto;
-  margin: 0 auto;
   border-radius: 8px;
   transition: opacity 0.2s ease;
 }
 
 .beyond-carousel__arrow {
-  flex-shrink: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -715,7 +711,7 @@ ul {
   height: 38px;
   border-radius: 50%;
   border: 1px solid var(--border);
-  background: transparent;
+  background: rgba(252, 249, 249, 0.85);
   color: var(--ink);
   font-size: 1.1rem;
   line-height: 1;
@@ -730,17 +726,19 @@ ul {
   background: var(--blush);
 }
 
+.beyond-carousel__arrow--prev {
+  left: 0.6rem;
+}
+
+.beyond-carousel__arrow--next {
+  right: 0.6rem;
+}
+
 .beyond-carousel__counter {
   margin-top: 0.85rem;
   font-size: 0.85rem;
   color: var(--muted);
   letter-spacing: 0.03em;
-}
-
-@media (max-width: 720px) {
-  .beyond-carousel__image {
-    max-height: 280px;
-  }
 }
 
 /* SheDesign lightbox */
