@@ -37,21 +37,23 @@ if ('IntersectionObserver' in window && revealEls.length) {
   revealEls.forEach((el) => el.classList.add('is-visible'));
 }
 
-// Beyond Technology — SheDesign single-photo carousel + lightbox
-const carousel = document.querySelector('[data-carousel]');
+// Beyond Technology — SheDesign single-photo carousel (no auto-movement) + lightbox
+const showcase = document.querySelector('[data-showcase]');
 
-if (carousel) {
+if (showcase) {
   const SHEDESIGN_PHOTOS = Array.from({ length: 12 }, (_, i) => ({
     src: `assets/shedesign/she${i + 1}.jpg`,
     alt: 'Photo from volunteering with SheDesign Nepal',
   }));
 
-  const carouselImage = carousel.querySelector('[data-carousel-image]');
-  const carouselCounter = carousel.querySelector('[data-carousel-counter]');
-  const carouselPhotoBtn = carousel.querySelector('[data-carousel-photo]');
-  const carouselPrevBtn = carousel.querySelector('[data-carousel-prev]');
-  const carouselNextBtn = carousel.querySelector('[data-carousel-next]');
+  const carouselImage = showcase.querySelector('[data-carousel-image]');
+  const carouselCounter = showcase.querySelector('[data-carousel-counter]');
+  const carouselPhotoBtn = showcase.querySelector('[data-carousel-photo]');
+  const carouselPrevBtn = showcase.querySelector('[data-carousel-prev]');
+  const carouselNextBtn = showcase.querySelector('[data-carousel-next]');
 
+  // One index, one render function — arrows are the only thing that moves it.
+  // No timer, no animation loop, nothing else touches this state.
   let carouselIndex = 0;
 
   const renderCarousel = (index) => {
@@ -66,10 +68,15 @@ if (carousel) {
     carouselCounter.textContent = `${carouselIndex + 1} / ${SHEDESIGN_PHOTOS.length}`;
   };
 
-  carouselPrevBtn.addEventListener('click', () => renderCarousel(carouselIndex - 1));
-  carouselNextBtn.addEventListener('click', () => renderCarousel(carouselIndex + 1));
+  if (carouselPrevBtn) {
+    carouselPrevBtn.addEventListener('click', () => renderCarousel(carouselIndex - 1));
+  }
 
-  // --- Lightbox (shares the same photo list; its own, independent index) ---
+  if (carouselNextBtn) {
+    carouselNextBtn.addEventListener('click', () => renderCarousel(carouselIndex + 1));
+  }
+
+  // --- Lightbox ---
   const lightbox = document.querySelector('[data-lightbox]');
 
   if (lightbox) {
@@ -114,7 +121,11 @@ if (carousel) {
       }
     }
 
-    carouselPhotoBtn.addEventListener('click', () => openLightbox(carouselIndex));
+    // Clicking the carousel photo opens the lightbox at whichever photo is
+    // currently showing
+    if (carouselPhotoBtn) {
+      carouselPhotoBtn.addEventListener('click', () => openLightbox(carouselIndex));
+    }
 
     closeBtn.addEventListener('click', closeLightbox);
     lbPrevBtn.addEventListener('click', () => showLightboxPhoto(lightboxIndex - 1));

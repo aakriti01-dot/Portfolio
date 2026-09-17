@@ -737,6 +737,12 @@ ul {
   letter-spacing: 0.03em;
 }
 
+@media (max-width: 720px) {
+  .beyond-carousel__image {
+    max-height: 280px;
+  }
+}
+
 /* SheDesign lightbox */
 
 .lightbox {
@@ -993,10 +999,6 @@ li:nth-child(2) .contact-link__icon {
 
   .beyond-entry {
     grid-template-columns: 1fr;
-  }
-
-  .beyond-carousel__image {
-    max-height: 280px;
   }
 }
 
