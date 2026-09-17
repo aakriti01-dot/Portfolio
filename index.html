@@ -249,7 +249,7 @@
         </article>
 
         <!-- SheDesign Nepal -->
-        <article class="beyond-entry beyond-entry--full reveal">
+        <article class="beyond-entry reveal">
           <div class="beyond-entry__text">
             <h3 class="beyond-entry__title">SheDesign Nepal</h3>
             <p class="beyond-entry__meta">Volunteer · Christmas Program Host</p>
@@ -264,34 +264,15 @@
             <a href="https://www.facebook.com/share/1DZyFywSam/?mibextid=wwXIfr" class="project__link" target="_blank" rel="noopener noreferrer">SheDesign Nepal ↗</a>
           </div>
 
-          <div class="beyond-gallery" data-gallery>
-            <div class="beyond-gallery__track">
-              <img src="assets/shedesign/she1.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she2.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she3.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she4.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she5.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she6.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she7.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she8.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she9.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she10.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she11.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <img src="assets/shedesign/she12.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-gallery__image">
-              <!-- Duplicated set — decorative only, used to create a seamless loop -->
-              <img src="assets/shedesign/she1.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she2.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she3.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she4.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she5.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she6.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she7.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she8.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she9.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she10.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she11.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
-              <img src="assets/shedesign/she12.jpg" alt="" class="beyond-gallery__image" aria-hidden="true">
+          <div class="beyond-carousel" data-carousel>
+            <div class="beyond-carousel__frame">
+              <button class="beyond-carousel__arrow beyond-carousel__arrow--prev" type="button" data-carousel-prev aria-label="Previous photo">‹</button>
+              <button class="beyond-carousel__photo" type="button" data-carousel-photo aria-label="View photo larger">
+                <img src="assets/shedesign/she1.jpg" alt="Photo from volunteering with SheDesign Nepal" class="beyond-carousel__image" data-carousel-image>
+              </button>
+              <button class="beyond-carousel__arrow beyond-carousel__arrow--next" type="button" data-carousel-next aria-label="Next photo">›</button>
             </div>
+            <p class="beyond-carousel__counter" data-carousel-counter>1 / 12</p>
           </div>
         </article>
 
@@ -379,6 +360,13 @@
     <span class="site-footer__copy">© <span id="year"></span> Aakriti A.C. All rights reserved.</span>
   </div>
 </footer>
+
+<div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-hidden="true" aria-label="SheDesign Nepal photo viewer">
+  <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close photo viewer">✕</button>
+  <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev aria-label="Previous photo">‹</button>
+  <img src="" alt="" class="lightbox__image" data-lightbox-image>
+  <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next photo">›</button>
+</div>
 
 <script src="script.js"></script>
 </body>

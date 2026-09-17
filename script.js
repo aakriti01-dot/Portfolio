@@ -37,15 +37,116 @@ if ('IntersectionObserver' in window && revealEls.length) {
   revealEls.forEach((el) => el.classList.add('is-visible'));
 }
 
-// Beyond Technology — pause the SheDesign auto-scroll while it's being touched/swiped
-const beyondGallery = document.querySelector('[data-gallery]');
-if (beyondGallery) {
-  const pauseGallery = () => beyondGallery.classList.add('is-paused');
-  const resumeGallery = () => beyondGallery.classList.remove('is-paused');
+// Beyond Technology — SheDesign single-photo carousel + lightbox
+const carousel = document.querySelector('[data-carousel]');
 
-  beyondGallery.addEventListener('touchstart', pauseGallery, { passive: true });
-  beyondGallery.addEventListener('touchend', resumeGallery);
-  beyondGallery.addEventListener('touchcancel', resumeGallery);
+if (carousel) {
+  const SHEDESIGN_PHOTOS = Array.from({ length: 12 }, (_, i) => ({
+    src: `assets/shedesign/she${i + 1}.jpg`,
+    alt: 'Photo from volunteering with SheDesign Nepal',
+  }));
+
+  const carouselImage = carousel.querySelector('[data-carousel-image]');
+  const carouselCounter = carousel.querySelector('[data-carousel-counter]');
+  const carouselPhotoBtn = carousel.querySelector('[data-carousel-photo]');
+  const carouselPrevBtn = carousel.querySelector('[data-carousel-prev]');
+  const carouselNextBtn = carousel.querySelector('[data-carousel-next]');
+
+  let carouselIndex = 0;
+
+  const renderCarousel = (index) => {
+    carouselIndex = (index + SHEDESIGN_PHOTOS.length) % SHEDESIGN_PHOTOS.length;
+    const photo = SHEDESIGN_PHOTOS[carouselIndex];
+    carouselImage.style.opacity = '0';
+    window.setTimeout(() => {
+      carouselImage.src = photo.src;
+      carouselImage.alt = photo.alt;
+      carouselImage.style.opacity = '1';
+    }, 150);
+    carouselCounter.textContent = `${carouselIndex + 1} / ${SHEDESIGN_PHOTOS.length}`;
+  };
+
+  carouselPrevBtn.addEventListener('click', () => renderCarousel(carouselIndex - 1));
+  carouselNextBtn.addEventListener('click', () => renderCarousel(carouselIndex + 1));
+
+  // --- Lightbox (shares the same photo list; its own, independent index) ---
+  const lightbox = document.querySelector('[data-lightbox]');
+
+  if (lightbox) {
+    const lightboxImage = lightbox.querySelector('[data-lightbox-image]');
+    const closeBtn = lightbox.querySelector('[data-lightbox-close]');
+    const lbPrevBtn = lightbox.querySelector('[data-lightbox-prev]');
+    const lbNextBtn = lightbox.querySelector('[data-lightbox-next]');
+
+    let lightboxIndex = 0;
+    let lastFocused = null;
+
+    const showLightboxPhoto = (index) => {
+      lightboxIndex = (index + SHEDESIGN_PHOTOS.length) % SHEDESIGN_PHOTOS.length;
+      const photo = SHEDESIGN_PHOTOS[lightboxIndex];
+      lightboxImage.src = photo.src;
+      lightboxImage.alt = photo.alt;
+    };
+
+    const onKeydown = (e) => {
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowRight') showLightboxPhoto(lightboxIndex + 1);
+      else if (e.key === 'ArrowLeft') showLightboxPhoto(lightboxIndex - 1);
+    };
+
+    function openLightbox(index) {
+      lastFocused = document.activeElement;
+      showLightboxPhoto(index);
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+      document.addEventListener('keydown', onKeydown);
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKeydown);
+      if (lastFocused && typeof lastFocused.focus === 'function') {
+        lastFocused.focus();
+      }
+    }
+
+    carouselPhotoBtn.addEventListener('click', () => openLightbox(carouselIndex));
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lbPrevBtn.addEventListener('click', () => showLightboxPhoto(lightboxIndex - 1));
+    lbNextBtn.addEventListener('click', () => showLightboxPhoto(lightboxIndex + 1));
+
+    // Clicking the backdrop (anywhere outside the image/buttons) closes it
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Swipe support on mobile
+    let touchStartX = null;
+    lightbox.addEventListener(
+      'touchstart',
+      (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+      },
+      { passive: true }
+    );
+
+    lightbox.addEventListener('touchend', (e) => {
+      if (touchStartX === null) return;
+      const deltaX = e.changedTouches[0].clientX - touchStartX;
+      const SWIPE_THRESHOLD = 40;
+      if (deltaX > SWIPE_THRESHOLD) {
+        showLightboxPhoto(lightboxIndex - 1);
+      } else if (deltaX < -SWIPE_THRESHOLD) {
+        showLightboxPhoto(lightboxIndex + 1);
+      }
+      touchStartX = null;
+    });
+  }
 }
 
 // Footer year
