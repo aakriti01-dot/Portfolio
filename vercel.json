@@ -1,0 +1,6 @@
+{
+  "buildCommand": "echo hello",
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
